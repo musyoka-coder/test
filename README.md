@@ -27,13 +27,13 @@ npm run dev
 
 `db:seed` resets the **local** database and loads schema migrations and the package seed. Use the publishable key printed by `db:start` in `.env.local`. Local verification and reset emails arrive at [Mailpit](http://localhost:54324). Use the application at [localhost](http://localhost:3000) to match the callback origin.
 
-For hosted deployments set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, and `APP_URL`. Vercel supplies `VERCEL_URL` automatically as a fallback. Add the canonical site's `/auth/verify` callback and its query variants to the Supabase redirect allowlist. Configure SMTP for external guest delivery. Verification and recovery use the original browser's PKCE cookie. No service-role key is required.
+For hosted deployments set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, and `APP_URL`. The app falls back to the Vercel production domain or the generated preview deployment URL. Add the canonical site's `/auth/verify` callback and its query variants to the Supabase redirect allowlist. Configure SMTP for external guest delivery. Verification and recovery use the original browser's PKCE cookie. No service-role key is required.
 
 Grant admin access by setting `public.profiles.is_admin` for the verified user's UUID from the Supabase SQL editor. Never use user-editable metadata as an admin claim.
 
 ## Architecture and checks
 
-Pages render the catalog and dashboard. Server actions validate form data and enforce CSRF protection. Supabase RLS and transactional functions enforce ownership, admin access, and booking constraints. The sample cabin stays outside live inventory. `GET /api/health` checks whether the package API responds and returns 503 when unavailable. Server errors log an operation and sanitized code.
+Pages render the catalog and dashboard. Server actions validate form data and enforce CSRF protection. Supabase RLS and transactional functions enforce ownership, admin access, and booking constraints. The sample cabin stays outside live inventory. `GET /api/health` checks whether the package API responds and returns 503 when unavailable. Server errors log an operation and sanitized code. The optional server-side `SENTRY_DSN` forwards only an error event, operation, and sanitized code. Leave it unset to disable forwarding.
 
 ```sh
 npm run format:check

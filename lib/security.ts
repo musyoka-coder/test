@@ -3,9 +3,13 @@ import { randomBytes, timingSafeEqual } from 'node:crypto'
 export function appOrigin(
   env: Record<string, string | undefined> = process.env,
 ) {
+  const deploymentHost =
+    env.VERCEL_ENV === 'production'
+      ? env.VERCEL_PROJECT_PRODUCTION_URL || env.VERCEL_URL
+      : env.VERCEL_URL
   const url = new URL(
     env.APP_URL ||
-      (env.VERCEL_URL ? 'https://' + env.VERCEL_URL : 'http://localhost:3000'),
+      (deploymentHost ? 'https://' + deploymentHost : 'http://localhost:3000'),
   )
   if (
     !['https:', 'http:'].includes(url.protocol) ||

@@ -10,12 +10,13 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run --coverage",
     "audit": "npm audit --audit-level=high",
-    "format:check": "prettier --check app lib proxy.ts next.config.ts vitest.config.ts",
+    "format:check": "prettier --check app lib proxy.ts next.config.ts vitest.config.ts instrumentation.ts",
     "db:start": "supabase start",
     "db:seed": "supabase db reset --local",
     "db:test": "psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -v ON_ERROR_STOP=1 -f supabase/tests/booking_flow.sql"
   },
   "dependencies": {
+    "@sentry/nextjs": "^11.14.0",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.1",
     "next": "16.4.6",

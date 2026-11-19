@@ -27,7 +27,7 @@ export async function requestBooking(form: FormData) {
     p_interests: item.interests,
   })
   if (error) {
-    reportFailure('request_booking', error)
+    await reportFailure('request_booking', error)
     result(
       path,
       'The request could not be saved. Check the current price and cabin availability.',
@@ -47,7 +47,7 @@ export async function acceptCabin(form: FormData) {
   if (!parsed.success) result(path, 'Review the stay inclusions first.')
   const { error } = await s.rpc('accept_cabin', { p_id: parsed.data.id })
   if (error) {
-    reportFailure('accept_cabin', error)
+    await reportFailure('accept_cabin', error)
     result(
       path,
       'This cabin assignment could not be accepted. Refresh the dashboard.',

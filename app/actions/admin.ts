@@ -56,7 +56,7 @@ export async function manage(form: FormData) {
         p_directions: directions,
         p_activities: activities,
       })
-      if (response.error) reportFailure(action, response.error)
+      if (response.error) await reportFailure(action, response.error)
       if (response.error)
         result(
           '/admin',
@@ -66,7 +66,7 @@ export async function manage(form: FormData) {
     }
   }
   if (error) {
-    reportFailure(item.action, error)
+    await reportFailure(item.action, error)
     result(
       '/admin',
       'Changes could not be saved. Review the current status and cabin availability.',

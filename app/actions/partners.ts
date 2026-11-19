@@ -18,7 +18,7 @@ export async function applyHost(form: FormData) {
     )
   const { error } = await s.from('host_applications').insert(parsed.data)
   if (error) {
-    reportFailure('apply_host', error)
+    await reportFailure('apply_host', error)
     result(path, 'Application could not be saved. Try again later.')
   }
   result(

@@ -11,6 +11,13 @@ it('uses a trusted canonical origin and validates its shape', () => {
   expect(appOrigin({ VERCEL_URL: 'preview.example.test' })).toBe(
     'https://preview.example.test',
   )
+  expect(
+    appOrigin({
+      VERCEL_ENV: 'production',
+      VERCEL_PROJECT_PRODUCTION_URL: 'quiet.example.test',
+      VERCEL_URL: 'deployment.example.test',
+    }),
+  ).toBe('https://quiet.example.test')
   expect(() =>
     appOrigin({ APP_URL: 'https://quiet.example.test/redirect' }),
   ).toThrow('Invalid application origin')

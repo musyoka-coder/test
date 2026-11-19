@@ -29,14 +29,14 @@ export async function authenticate(form: FormData) {
     const { error } = await s.auth.resetPasswordForEmail(input.email, {
       redirectTo: callback.href,
     })
-    if (error) reportFailure('password_recovery', error)
+    if (error) await reportFailure('password_recovery', error)
     result(path, 'If your account exists, a reset link is on its way.', true)
   }
 
   if (input.mode === 'reset') {
     const { error } = await s.auth.updateUser({ password: input.password })
     if (error) {
-      reportFailure('password_update', error)
+      await reportFailure('password_update', error)
       result(
         path,
         'Password could not be updated. Request a fresh reset link and try again.',
@@ -59,7 +59,7 @@ export async function authenticate(form: FormData) {
       },
     })
     if (error) {
-      reportFailure('signup', error)
+      await reportFailure('signup', error)
       result(
         path,
         'Account could not be created. Check your details or try again later.',
@@ -78,7 +78,7 @@ export async function authenticate(form: FormData) {
     password: input.password,
   })
   if (error) {
-    reportFailure('signin', error)
+    await reportFailure('signin', error)
     result(
       path,
       'Sign-in failed. Check your credentials and verify your email.',
@@ -98,7 +98,7 @@ export async function logout(form: FormData) {
   const s = await client('/account', form)
   const { error } = await s.auth.signOut()
   if (error) {
-    reportFailure('signout', error)
+    await reportFailure('signout', error)
     result('/dashboard', 'Sign-out failed. Try again.')
   }
   redirect('/')
