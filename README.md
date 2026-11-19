@@ -1,19 +1,47 @@
 # Quiet Reset Kenya
 
-Next.js, Tailwind CSS, Supabase Auth and Postgres. Requests do not collect payments.
+Rural stay catalog, guest bookings, host applications, and admin review. The Next.js app uses Supabase Auth and Postgres. Requests do not collect payments.
 
-## Configuration
+## Run from a fresh clone
 
-Run `npm ci` and `npm run dev`. Apply the SQL migration to a dedicated project. Set these environment variables on the server.
+Use Node.js 24 and the committed npm lockfile.
 
-- `SUPABASE_URL` is the project API URL.
-- `SUPABASE_PUBLISHABLE_KEY` is the public Supabase publishable key. No service-role key is needed.
-- `APP_URL` is the canonical origin. When omitted on Vercel the app uses the deployment URL.
+```sh
+npm ci
+npm run dev
+```
 
-In Supabase Auth enable email and password signup and email confirmation. Allow the preview and production callback URLs at `/auth/verify` (including query variants if needed). Set the production Site URL. Configure SMTP for external guest delivery. Verification and recovery use the original browser's PKCE cookie.
+Without Supabase credentials, the public pages show the launch catalog and write operations are unavailable. Tests, lint, type checks, and the production build run without an external Supabase account.
 
-Give a verified account admin access from the Supabase SQL Editor by updating `public.profiles.is_admin` for that user's UUID. Never authorize the account by trusting client metadata.
+## Local database and authentication
 
-The launch seed contains only package pricing. The sample cabin is presentation content. Add an approved host and publish a cabin from the admin dashboard to populate live inventory.
+Install Docker and a PostgreSQL client (`psql`). The Supabase CLI is installed by npm.
 
-The initial photo illustrates the cabin concept. Source is the [Kirinyaga County photo on Twende Sasa](https://twendesasa.com/list-of-best-places-to-visit-in-kirinyaga-county/).
+```sh
+npm run db:start
+npm run db:seed
+cp .env.example .env.local
+npm run db:test
+npm run dev
+```
+
+`db:seed` resets the **local** database and loads schema migrations and the package seed. Use the publishable key printed by `db:start` in `.env.local`. Local verification and reset emails arrive at [Mailpit](http://localhost:54324). Use the application at [localhost](http://localhost:3000) to match the callback origin.
+
+For hosted deployments set `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, and `APP_URL`. Vercel supplies `VERCEL_URL` automatically as a fallback. Add the canonical site's `/auth/verify` callback and its query variants to the Supabase redirect allowlist. Configure SMTP for external guest delivery. Verification and recovery use the original browser's PKCE cookie. No service-role key is required.
+
+Grant admin access by setting `public.profiles.is_admin` for the verified user's UUID from the Supabase SQL editor. Never use user-editable metadata as an admin claim.
+
+## Architecture and checks
+
+Pages render the catalog and dashboard. Server actions validate form data and enforce CSRF protection. Supabase RLS and transactional functions enforce ownership, admin access, and booking constraints. The sample cabin stays outside live inventory. `GET /api/health` checks whether the package API responds and returns 503 when unavailable. Server errors log an operation and sanitized code.
+
+```sh
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run audit
+```
+
+The launch photograph is illustrative. [Kirinyaga County photo on Twende Sasa](https://twendesasa.com/list-of-best-places-to-visit-in-kirinyaga-county/).
