@@ -16,4 +16,4 @@ Give a verified account admin access from the Supabase SQL Editor by updating `p
 
 The launch seed contains only package pricing. The sample cabin is presentation content. Add an approved host and publish a cabin from the admin dashboard to populate live inventory.
 
-The initial photo illustrates the cabin concept. Source is the [Naivasha cottage listing](https://www.kejasmart.com/property-in-naivasha-kenya/2-bedroom-cottage-at-naivasha).
+The initial photo illustrates the cabin concept. Source is the [Kirinyaga County photo on Twende Sasa](https://twendesasa.com/list-of-best-places-to-visit-in-kirinyaga-county/).
