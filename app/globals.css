@@ -1,56 +1,365 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root{--paper:#f7f4ec;--green:#20392c;--forest:#172b21;--ink:#232b23;--muted:#555e50;--border:#d5d7c8;--card:#fffcf5}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,sans-serif}
-a{color:inherit;text-underline-offset:.25em}
-a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #ac6a37;outline-offset:3px}
-h1,h2,h3,.brand{font-family:Georgia,'Times New Roman',serif;font-weight:400;color:var(--forest);line-height:1.05;margin:0}
-h1{font-size:clamp(3rem,8vw,6.6rem);letter-spacing:-.065em}
-h2{font-size:clamp(2rem,4.5vw,3.65rem);letter-spacing:-.045em}
-h3{font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.03em}
-p{margin:.65rem 0 0}
-.shell{width:min(100% - 2rem,1280px);margin-inline:auto}
-.site-header{background:#fbf8f0;border-bottom:1px solid var(--border)}
-.nav,.footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-block:1rem}
-.nav>div{display:flex;align-items:center;gap:clamp(.85rem,3vw,2.25rem);flex-wrap:wrap;font-size:.88rem}
-.nav a,.brand,.button{text-decoration:none}
-.brand{font-size:1.6rem;letter-spacing:-.05em;display:inline-flex;gap:.45rem;align-items:baseline}
-.brand span,.eyebrow{font:700 .68rem/1.4 system-ui,sans-serif;letter-spacing:.16em;color:#52644f}
-.nav-account{border:1px solid var(--border);padding:.25rem .65rem}
-.hero{display:grid;gap:1.35rem;padding:2rem 0 2.6rem}
-.hero-copy{align-self:center}
-.hero-copy>p:not(.eyebrow),.heading>p:not(.eyebrow),.intro{max-width:56ch;color:var(--muted)}
-.hero-copy>p:not(.eyebrow){font-size:clamp(1rem,2vw,1.2rem)}
-.eyebrow{margin:0 0 .7rem;text-transform:uppercase}
-.hero-photo{margin:0;min-height:300px;position:relative;display:flex;align-items:end;background:#55664b url('https://twendesasa.com/wp-content/uploads/2023/09/List-Of-Best-Places-To-Visit-In-Kirinyaga-County.jpg') center/cover no-repeat;border-radius:3px;overflow:hidden}
-.hero-photo figcaption{padding:.35rem .65rem;margin:.6rem;background:#172b21;color:white;font-size:.72rem}
-.actions{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;margin-top:1.4rem}
-.button{border:1px solid var(--green);background:var(--green);color:#fffdf5;padding:.65rem 1rem;display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:44px;font:650 .88rem/1.2 system-ui,sans-serif;cursor:pointer;border-radius:3px;width:fit-content}
-.button:hover{background:#34503c;color:white}.button.outline{background:transparent;color:var(--green)}.button.outline:hover{background:#e7ecdf}.button.light{background:var(--paper);color:var(--green)}
-.lower,.content{padding-block:2rem 3.5rem;min-height:45vh}
-.lower{border-top:1px solid var(--border)}
-.heading{margin-bottom:1.65rem}
-.heading h1{font-size:clamp(2.75rem,7vw,5.5rem)}
-.grid,.stack,.form{display:grid;gap:1rem}
-.grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr))}
-.rates{margin-top:1.4rem}
-.card{padding:clamp(1rem,3vw,1.8rem);border:1px solid var(--border);background:var(--card);border-radius:5px;min-width:0;overflow-wrap:anywhere}
-.rate .button,.host-section .button{margin-top:1rem}
-.price{font-family:Georgia,serif;color:var(--forest);font-size:2.1rem;line-height:1.12}
-.subtle{margin:0;color:var(--muted);font-size:.85rem}
-.host-section{background:var(--green);color:#f8f5e7;padding-block:3rem}
-.host-section h2,.host-section .eyebrow{color:inherit}
-footer{border-top:1px solid var(--border);background:#eaece1;font-size:.88rem}
-.footer p{margin:0}
-.narrow{max-width:760px}
-.section{margin-top:1.6rem}
-.form-grid,.details{display:grid;gap:.85rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
-.details{margin:1.15rem 0 0}.details>div{padding:.5rem 0;border-top:1px solid var(--border)}dt{font-size:.8rem;font-weight:700;color:var(--muted)}dd{margin:0}
-label,legend{font-size:.9rem;font-weight:650}
-input:not([type=checkbox]),select,textarea{background:#fffefa;border:1px solid #929987;border-radius:4px;min-height:44px;width:100%;display:block;padding:.55rem .65rem;margin-top:.3rem;font:inherit;color:var(--ink)}
-textarea{min-height:100px}fieldset{border:0;margin:0;padding:0}.checks{display:flex;flex-wrap:wrap;gap:.65rem 1.2rem;margin-top:.4rem}.check,.checks label{display:flex;align-items:start;gap:.45rem}.check input,.checks input{margin-top:.35rem;accent-color:var(--green)}
-.alert{padding:.75rem;border:1px solid #b6c9a5;background:#edf2e7;margin:.8rem 0}.alert.error{background:#f5e8e1;border-color:#b87f68}
-summary{cursor:pointer;margin-block:.65rem}.directions{white-space:pre-wrap}
-.filters{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));align-items:end}
-@media(min-width:760px){.shell{width:min(100% - 5rem,1280px)}.hero{grid-template-columns:1fr 1.16fr;gap:2rem;padding:2.25rem 0 3rem;min-height:530px}.hero-photo{min-height:455px}.content{padding-top:3.2rem}.nav-account{padding:.38rem .9rem}}
+:root {
+  --paper: #f7f4ec;
+  --green: #20392c;
+  --forest: #172b21;
+  --ink: #232b23;
+  --muted: #555e50;
+  --border: #d5d7c8;
+  --card: #fffcf5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    16px/1.65 system-ui,
+    sans-serif;
+}
+a {
+  color: inherit;
+  text-underline-offset: 0.25em;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid #ac6a37;
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3,
+.brand {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+  color: var(--forest);
+  line-height: 1.05;
+  margin: 0;
+}
+h1 {
+  font-size: clamp(3rem, 8vw, 6.6rem);
+  letter-spacing: -0.065em;
+}
+h2 {
+  font-size: clamp(2rem, 4.5vw, 3.65rem);
+  letter-spacing: -0.045em;
+}
+h3 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+}
+p {
+  margin: 0.65rem 0 0;
+}
+.shell {
+  width: min(100% - 2rem, 1280px);
+  margin-inline: auto;
+}
+.site-header {
+  background: #fbf8f0;
+  border-bottom: 1px solid var(--border);
+}
+.nav,
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-block: 1rem;
+}
+.nav > div {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.85rem, 3vw, 2.25rem);
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+}
+.nav a,
+.brand,
+.button {
+  text-decoration: none;
+}
+.brand {
+  font-size: 1.6rem;
+  letter-spacing: -0.05em;
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: baseline;
+}
+.brand span,
+.eyebrow {
+  font:
+    700 0.68rem/1.4 system-ui,
+    sans-serif;
+  letter-spacing: 0.16em;
+  color: #52644f;
+}
+.nav-account {
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.65rem;
+}
+.hero {
+  display: grid;
+  gap: 1.35rem;
+  padding: 2rem 0 2.6rem;
+}
+.hero-copy {
+  align-self: center;
+}
+.hero-copy > p:not(.eyebrow),
+.heading > p:not(.eyebrow),
+.intro {
+  max-width: 56ch;
+  color: var(--muted);
+}
+.hero-copy > p:not(.eyebrow) {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.eyebrow {
+  margin: 0 0 0.7rem;
+  text-transform: uppercase;
+}
+.hero-photo {
+  margin: 0;
+  min-height: 300px;
+  position: relative;
+  display: flex;
+  align-items: end;
+  background: #55664b
+    url('https://twendesasa.com/wp-content/uploads/2023/09/List-Of-Best-Places-To-Visit-In-Kirinyaga-County.jpg')
+    center/cover no-repeat;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.hero-photo figcaption {
+  padding: 0.35rem 0.65rem;
+  margin: 0.6rem;
+  background: #172b21;
+  color: white;
+  font-size: 0.72rem;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+.button {
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: #fffdf5;
+  padding: 0.65rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  font:
+    650 0.88rem/1.2 system-ui,
+    sans-serif;
+  cursor: pointer;
+  border-radius: 3px;
+  width: fit-content;
+}
+.button:hover {
+  background: #34503c;
+  color: white;
+}
+.button.outline {
+  background: transparent;
+  color: var(--green);
+}
+.button.outline:hover {
+  background: #e7ecdf;
+}
+.button.light {
+  background: var(--paper);
+  color: var(--green);
+}
+.lower,
+.content {
+  padding-block: 2rem 3.5rem;
+  min-height: 45vh;
+}
+.lower {
+  border-top: 1px solid var(--border);
+}
+.heading {
+  margin-bottom: 1.65rem;
+}
+.heading h1 {
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+}
+.grid,
+.stack,
+.form {
+  display: grid;
+  gap: 1rem;
+}
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 235px), 1fr));
+}
+.rates {
+  margin-top: 1.4rem;
+}
+.card {
+  padding: clamp(1rem, 3vw, 1.8rem);
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 5px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.rate .button,
+.host-section .button {
+  margin-top: 1rem;
+}
+.price {
+  font-family: Georgia, serif;
+  color: var(--forest);
+  font-size: 2.1rem;
+  line-height: 1.12;
+}
+.subtle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.host-section {
+  background: var(--green);
+  color: #f8f5e7;
+  padding-block: 3rem;
+}
+.host-section h2,
+.host-section .eyebrow {
+  color: inherit;
+}
+footer {
+  border-top: 1px solid var(--border);
+  background: #eaece1;
+  font-size: 0.88rem;
+}
+.footer p {
+  margin: 0;
+}
+.narrow {
+  max-width: 760px;
+}
+.section {
+  margin-top: 1.6rem;
+}
+.form-grid,
+.details {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+}
+.details {
+  margin: 1.15rem 0 0;
+}
+.details > div {
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--border);
+}
+dt {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+dd {
+  margin: 0;
+}
+label,
+legend {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+input:not([type='checkbox']),
+select,
+textarea {
+  background: #fffefa;
+  border: 1px solid #929987;
+  border-radius: 4px;
+  min-height: 44px;
+  width: 100%;
+  display: block;
+  padding: 0.55rem 0.65rem;
+  margin-top: 0.3rem;
+  font: inherit;
+  color: var(--ink);
+}
+textarea {
+  min-height: 100px;
+}
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.2rem;
+  margin-top: 0.4rem;
+}
+.check,
+.checks label {
+  display: flex;
+  align-items: start;
+  gap: 0.45rem;
+}
+.check input,
+.checks input {
+  margin-top: 0.35rem;
+  accent-color: var(--green);
+}
+.alert {
+  padding: 0.75rem;
+  border: 1px solid #b6c9a5;
+  background: #edf2e7;
+  margin: 0.8rem 0;
+}
+.alert.error {
+  background: #f5e8e1;
+  border-color: #b87f68;
+}
+summary {
+  cursor: pointer;
+  margin-block: 0.65rem;
+}
+.directions {
+  white-space: pre-wrap;
+}
+.filters {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  align-items: end;
+}
+@media (min-width: 760px) {
+  .shell {
+    width: min(100% - 5rem, 1280px);
+  }
+  .hero {
+    grid-template-columns: 1fr 1.16fr;
+    gap: 2rem;
+    padding: 2.25rem 0 3rem;
+    min-height: 530px;
+  }
+  .hero-photo {
+    min-height: 455px;
+  }
+  .content {
+    padding-top: 3.2rem;
+  }
+  .nav-account {
+    padding: 0.38rem 0.9rem;
+  }
+}
