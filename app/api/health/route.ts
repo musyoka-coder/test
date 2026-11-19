@@ -9,7 +9,7 @@ export async function GET() {
         .from('packages')
         .select('months')
         .limit(1)
-        .abortSignal(AbortSignal.timeout(2500))
+        .abortSignal(AbortSignal.timeout(10000))
       ready = !error
     } catch {
       ready = false
