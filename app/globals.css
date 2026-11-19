@@ -23,7 +23,7 @@ p{margin:.65rem 0 0}
 .hero-copy>p:not(.eyebrow),.heading>p:not(.eyebrow),.intro{max-width:56ch;color:var(--muted)}
 .hero-copy>p:not(.eyebrow){font-size:clamp(1rem,2vw,1.2rem)}
 .eyebrow{margin:0 0 .7rem;text-transform:uppercase}
-.hero-photo{margin:0;min-height:300px;position:relative;display:flex;align-items:end;background:#55664b url('https://kejasmart.s3.us-east-005.backblazeb2.com/uploads/property/179/2-bedroom-cottage-at-naivasha-67b8c4597fc3b.webp') center/cover no-repeat;border-radius:3px;overflow:hidden}
+.hero-photo{margin:0;min-height:300px;position:relative;display:flex;align-items:end;background:#55664b url('https://twendesasa.com/wp-content/uploads/2023/09/List-Of-Best-Places-To-Visit-In-Kirinyaga-County.jpg') center/cover no-repeat;border-radius:3px;overflow:hidden}
 .hero-photo figcaption{padding:.35rem .65rem;margin:.6rem;background:#172b21;color:white;font-size:.72rem}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;margin-top:1.4rem}
 .button{border:1px solid var(--green);background:var(--green);color:#fffdf5;padding:.65rem 1rem;display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:44px;font:650 .88rem/1.2 system-ui,sans-serif;cursor:pointer;border-radius:3px;width:fit-content}
